@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ShortUrlApi.Analytics;
 using ShortUrlApi.ShortUrl;
 
 namespace ShortUrlApi;
@@ -10,5 +11,5 @@ public class EfUnitOfWork : DbContext
     }
 
     public DbSet<ShortUrlModel> ShortUrls { get; set; }
-    public DbSet<Models.Analytics> Analytics { get; set; }
+    public DbSet<AnalyticsModel> Analytics { get; set; }
 }
