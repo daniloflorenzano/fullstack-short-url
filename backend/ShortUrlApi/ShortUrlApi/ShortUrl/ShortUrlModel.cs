@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using IdGen;
-using ShortUrlApi.Models;
 
 namespace ShortUrlApi.ShortUrl;
 
@@ -15,11 +14,11 @@ public sealed class ShortUrlModel
 
     [MaxLength(30, ErrorMessage = "UrlCode must be 30 characters or less")]
     public string UrlCode { get; set; } = string.Empty;
-    public Analytics[] Analytics { get; set; } = [];
+    public List<Analytics.Analytics> Analytics { get; set; } = [];
     public DateTime CreatedAt { get; set; }
     public DateTime? ExpiresAt { get; set; }
     public bool IsActive { get; set; }
-    public int Visits => Analytics.Length;
+    public int Visits => Analytics.Count;
 
     [Obsolete("This constructor is for EF Core only")]
     public ShortUrlModel()
@@ -47,23 +46,41 @@ public sealed class ShortUrlModel
         ExpiresAt = expiresAt;
         IsActive = isActive;
     }
+    
+    public static bool IsValidUrl(string url) => Uri.TryCreate(url, UriKind.Absolute, out _);
+
+    public static bool IsValidUrlCode(string urlCode) => urlCode.All(char.IsLetterOrDigit);
 
     private string GenerateShortUrlCode()
     {
         if (Id == 0)
             throw new InvalidOperationException("Id must be set before generating a short URL code");
         
-        var idBase64 = Convert.ToBase64String(BitConverter.GetBytes(Id));
-        return idBase64;
+        const string digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        var base62 = new List<char>();
+        
+        while (Id > 0)
+        {
+            base62.Insert(0, digits[(int)(Id % 62)]);
+            Id /= 62;
+        }
+
+        return new string(base62.ToArray());
     }
 
     private static long GenerateUniqueId()
     {
-        var snowFlakeIdGenerator = new IdGenerator(0);
+        const int epoch = 1738457625; // February 1, 2025 9:55:07 PM GMT-03:00
+        
+        var snowFlakeIdGenerator = new IdGenerator(
+            generatorId: 0,
+            options: new IdGeneratorOptions(
+                timeSource: new DefaultTimeSource(
+                    epoch: new DateTime(epoch, DateTimeKind.Utc)
+                )
+            )
+        );
+
         return snowFlakeIdGenerator.CreateId();
     }
-    
-    public static bool IsValidUrl(string url) => Uri.TryCreate(url, UriKind.Absolute, out _);
-
-    public static bool IsValidUrlCode(string urlCode) => urlCode.All(char.IsLetterOrDigit);
 }
