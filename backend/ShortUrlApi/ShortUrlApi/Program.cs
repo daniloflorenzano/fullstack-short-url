@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ShortUrlApi;
+using ShortUrlApi.Analytics;
 using ShortUrlApi.ShortUrl;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -81,11 +82,13 @@ app.MapPost("/api/v1/shorten", async (CreateShortUrlRequest requestDto, [FromSer
         
         var result = Results.Created($"/v1/shortUrl/{response.short_url_code}", response);
         
-        // mocka uma indepotência ate eu implementar direito
+        // TODO: implement Idempotency appropriately with a unique key and cache
+        // docs: https://www.milanjovanovic.tech/blog/implementing-idempotent-rest-apis-in-aspnetcore
         if (existingShortUrl != null)
             return result;
         
         await unitOfWork.ShortUrls.AddAsync(shortUrl);
+        await unitOfWork.SaveChangesAsync();
 
         return result;
     }
@@ -120,9 +123,49 @@ app.MapPost("/api/v1/shorten", async (CreateShortUrlRequest requestDto, [FromSer
     return await next(efiContext);
 });
 
-app.MapGet("/api/v1/shortUrl/{urlCode}", (string urlCode) =>
+app.MapGet("/api/v1/shortUrl/{urlCode}", (HttpRequest req, string urlCode, [FromServices] EfUnitOfWork unitOfWork) =>
 {
-    
+    try
+    {
+        var shortUrl = unitOfWork.ShortUrls.FirstOrDefault(s => 
+            s.UrlCode == urlCode 
+            && s.IsActive 
+            && (s.ExpiresAt > DateTime.UtcNow || s.ExpiresAt == null)
+        );
+
+        if (shortUrl == null)
+            return Results.NotFound();
+        
+        var analytics = new AnalyticsModel
+        {
+            Timestamp = DateTime.UtcNow,
+            UserAgent = req.Headers.UserAgent,
+            Referrer = req.Headers.Referer,
+            IpAddress = req.HttpContext.Connection.RemoteIpAddress?.ToString(),
+            Language = req.Headers.AcceptLanguage,
+        };
+        
+        shortUrl.Analytics.Add(analytics);
+        unitOfWork.SaveChanges();
+
+        return Results.Redirect(
+            url: shortUrl.LongUrl,
+            permanent: false // 302
+        );
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e);
+        return Results.Problem(e.Message);
+    }
 });
+
+// TODO: Implement GET /api/v1/shortUrl/{userId}/urls
+// TODO: Implement PUT /api/v1/shortUrl/{urlCode}/active-status | body: { "user_id: GUID, "is_active": bool }
+// TODO: Implement DELETE /api/v1/shortUrl/{urlCode} | body: { "user_id: GUID }      is it ok to be a hard delete?
+
+// TODO: Implement GET /api/v1/shortUrl/{urlCode}/analytics
+// TODO: Implement GET /api/v1/shortUrl/{urlCode}/analytics/{date}
+
 
 app.Run();

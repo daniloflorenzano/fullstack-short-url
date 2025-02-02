@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using IdGen;
+using ShortUrlApi.Analytics;
 
 namespace ShortUrlApi.ShortUrl;
 
@@ -14,7 +15,7 @@ public sealed class ShortUrlModel
 
     [MaxLength(30, ErrorMessage = "UrlCode must be 30 characters or less")]
     public string UrlCode { get; set; } = string.Empty;
-    public List<Analytics.Analytics> Analytics { get; set; } = [];
+    public List<AnalyticsModel> Analytics { get; set; } = [];
     public DateTime CreatedAt { get; set; }
     public DateTime? ExpiresAt { get; set; }
     public bool IsActive { get; set; }
