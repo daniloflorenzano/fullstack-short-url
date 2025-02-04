@@ -20,6 +20,7 @@ public sealed class ShortUrlModel
     public DateTime? ExpiresAt { get; set; }
     public bool IsActive { get; set; }
     public int Visits => Analytics.Count;
+    public Guid ExternalId { get; set; }
 
     [Obsolete("This constructor is for EF Core only")]
     public ShortUrlModel()
@@ -46,6 +47,8 @@ public sealed class ShortUrlModel
         CreatedAt = DateTime.UtcNow;
         ExpiresAt = expiresAt;
         IsActive = isActive;
+        
+        ExternalId = Guid.NewGuid();
     }
     
     public static bool IsValidUrl(string url) => Uri.TryCreate(url, UriKind.Absolute, out _);
