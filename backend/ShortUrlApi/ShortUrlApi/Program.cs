@@ -64,6 +64,16 @@ app.MapPost("/api/v1/shorten", async (CreateShortUrlRequest requestDto, [FromSer
 {
     try
     {
+        var userHasEnoughCredits = await unitOfWork
+            .UserCredits
+            .AnyAsync(uc => uc.UserId == requestDto.UserId && uc.Credits > 0);
+
+        if (!userHasEnoughCredits)
+            return Results.Problem(
+                "User does not have enough credits",
+                statusCode: StatusCodes.Status402PaymentRequired
+            );
+
         var shortUrl = new ShortUrlModel(
             requestDto.UserId,
             requestDto.LongUrl,
@@ -254,7 +264,6 @@ app.MapGet("/api/v1/shortUrl/{urlExternalId:guid}/analytics",
             return Results.Problem(e.Message);
         }
     });
-
 
 
 app.MapGet("/api/v1/shortUrl/{urlExternalId:guid}/analytics/{date:datetime}",
