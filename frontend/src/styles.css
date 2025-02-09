@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Ubuntu, sans-serif;
+  background-color: #fffdf8;
+  padding: 12px;
+}
+
+.nb-btn {
+  box-shadow: 2px 2px 0 0 #000;
+  border-radius: 0;
+  border-color: #070707;
+}

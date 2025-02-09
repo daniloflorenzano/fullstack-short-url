@@ -1,0 +1,33 @@
+.nav-header {
+  display: flex;
+  color: black;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.home-link {
+  margin: 0;
+  cursor: pointer;
+}
+
+.user-session-link {
+  background-color: #FF138D;
+  width: 10rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.end-line {
+  margin-top: 12px;
+  border-bottom: 2px solid #000000;
+
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
