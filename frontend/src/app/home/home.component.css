@@ -60,6 +60,7 @@
   font-size: 1rem;
   font-weight: bold;
   background-color: #FFC581;
+  cursor: pointer;
 }
 
 .line {
