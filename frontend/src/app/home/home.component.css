@@ -36,3 +36,55 @@
   left: 330px;
   rotate: 80deg;
 }
+
+.main-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 48px;
+  background-color: #FFF4DA;
+  height: 5rem;
+  border-radius: 5px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 0.7rem;
+}
+
+.main-input-text {
+  font-size: 0.9rem;
+  margin-right: 12px;
+  width: 100%;
+}
+
+.main-input-btn {
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #FFC581;
+}
+
+.line {
+  position: absolute;
+  top: 325px;
+  left: 5px;
+}
+
+.prod-desc {
+  font-size: 1rem;
+  margin-top: 48px;
+}
+
+.prod-desc h3::after {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 8px;
+  background-image: url('/img/rocket.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-bottom: -0.4rem;
+}
+
+.prod-desc p {
+  color: #323232;
+}
