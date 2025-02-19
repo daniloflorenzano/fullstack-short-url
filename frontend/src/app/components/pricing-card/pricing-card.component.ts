@@ -1,4 +1,5 @@
-import {Component, Input, numberAttribute} from '@angular/core';
+import {Component, input, Input, numberAttribute} from '@angular/core';
+import {Product} from "../../models/products.type";
 
 @Component({
   selector: 'app-pricing-card',
@@ -8,7 +9,5 @@ import {Component, Input, numberAttribute} from '@angular/core';
   styleUrl: './pricing-card.component.css'
 })
 export class PricingCardComponent {
-  @Input() planTitle!: string;
-  @Input() price!: string;
-  @Input({transform: numberAttribute}) credits!: number;
+  @Input() product!: Product;
 }

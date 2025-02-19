@@ -40,23 +40,11 @@
       </section>
       <section class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <app-pricing-card
-          planTitle="Just need a few links?"
-          price="$0.99"
-          credits=5
-        ></app-pricing-card>
-
-        <app-pricing-card
-          planTitle="Frequent user?"
-          price="$4.99"
-          credits=20
-        ></app-pricing-card>
-
-        <app-pricing-card
-          planTitle="Power user pack!"
-          price="$9.99"
-          credits=50
-        ></app-pricing-card>
+        @for (product of productItems(); track product.id) {
+          <app-pricing-card
+            [product]="product"
+          ></app-pricing-card>
+        }
 
       </section>
     </div>
