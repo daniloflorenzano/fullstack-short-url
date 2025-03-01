@@ -4,6 +4,6 @@ export type Product = {
   subtitle: string;
   price: number;
   valueInCredits: number;
-  description: string;
+  description: string[];
   image: string;
 }

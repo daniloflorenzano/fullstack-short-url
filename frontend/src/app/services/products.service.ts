@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Product} from "../models/products.type";
 
 @Injectable({
@@ -13,9 +13,11 @@ export class ProductsService {
       price: 0.99,
       valueInCredits: 5,
       description:
-        "1 credit = 1 shortened URL with full analytics\n" +
-        "Customize your link to make unique\n" +
-        "No expiration date",
+        [
+          "1 credit = 1 shortened URL with full analytics",
+          "Customize your link to make unique",
+          "No expiration date"
+        ],
       image: "/img/hand-give.svg",
     },
     {
@@ -25,9 +27,11 @@ export class ProductsService {
       price: 4.99,
       valueInCredits: 20,
       description:
-        "1 credit = 1 shortened URL with full analytics\n" +
-        "Customize your link to make unique\n" +
-        "No expiration date",
+        [
+          "1 credit = 1 shortened URL with full analytics",
+          "Customize your link to make unique",
+          "No expiration date"
+        ],
       image: "/img/hand-give.svg",
     },
     {
@@ -37,12 +41,15 @@ export class ProductsService {
       price: 9.99,
       valueInCredits: 50,
       description:
-        "1 credit = 1 shortened URL with full analytics\n" +
-        "Customize your link for better branding\n" +
-        "Maximum savings per link",
+        [
+          "1 credit = 1 shortened URL with full analytics",
+          "Customize your link for better branding",
+          "Maximum savings per link"
+        ],
       image: "/img/hand-give.svg",
     },
   ];
 
-  constructor() { }
+  constructor() {
+  }
 }

@@ -1,10 +1,13 @@
-import {Component, input, Input, numberAttribute} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Product} from "../../models/products.type";
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-pricing-card',
   standalone: true,
-  imports: [],
+  imports: [
+    NgOptimizedImage
+  ],
   templateUrl: './pricing-card.component.html',
   styleUrl: './pricing-card.component.css'
 })
