@@ -8,7 +8,7 @@
 
   background-color: #ffffff;
 
-  width: 14rem;
+  width: 14.5rem;
   height: 22rem;
 }
 
@@ -55,4 +55,16 @@
   cursor: pointer;
   width: 100%;
   padding: 0.2rem;
+}
+
+.card-ul li::before {
+  background-image: url('/img/checkmark.svg');
+  content: '';
+  display: inline-block;
+  width: 1.3rem;
+  height: 1.3rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 0.2rem;
+  margin-bottom: -0.5rem;
 }
