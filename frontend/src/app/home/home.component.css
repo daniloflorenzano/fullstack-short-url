@@ -1,44 +1,138 @@
 .body {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+  text-align: center;
+}
+
+.home-title {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-top: 48px;
+}
+
+.home-p {
+  font-size: 1rem;
+}
+
+.star1 {
+  position: absolute;
+  top: 100px;
+  left: 60px;
+}
+
+.star2 {
+  position: absolute;
+  top: 80px;
+  left: 90px;
+}
+
+.polygon1 {
+  position: absolute;
+  top: 160px;
+  left: 310px;
+}
+
+.polygon2 {
+  position: absolute;
+  top: 150px;
+  left: 330px;
+  rotate: 80deg;
+}
+
+.main-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 48px;
+  background-color: #FFF4DA;
+  height: 5rem;
+  border-radius: 5px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 0.7rem;
+}
+
+.main-input-text {
+  font-size: 0.9rem;
+  margin-right: 12px;
+  width: 100%;
+}
+
+.main-input-btn {
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #FFC581;
+  cursor: pointer;
+}
+
+.line {
+  position: absolute;
+  top: 325px;
+  left: 2px;
+}
+
+.prod-desc {
+  font-size: 1rem;
+  margin-top: 48px;
+}
+
+/*noinspection ALL*/
+.prod-desc h3::after {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 8px;
+  background-image: url('/img/rocket.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-bottom: -0.4rem;
+}
+
+.prod-desc p {
+  color: #323232;
+}
+
+.pricing-cards-section {
+  margin-top: 3rem;
+  /* cria um carrossel de cards  */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: auto;
+
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+}
+
+
+@media (min-width: 900px) {
+  .pricing-cards-section {
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-.user {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 0.1rem;
-}
-span {
-    margin-right: 0.3rem;
-    font-size: large;
-}
-h3 {
-    color: #ff3e00;
-}
-h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-}
-button {
-    cursor: pointer;
-    background-color: #ffb399;
-    border: none;
-    color: rgb(82, 82, 82);
-    padding: 0.75rem;
-    margin: 2rem;
-    transition: all 0.5s ease-in-out;
-    border-radius: 2rem;
-    font-size: large;
-}
-button:hover {
-    transform: scale(1.1);
-    background-color: #ff3e00;
-    color: white;
+  }
+
+  .main-input-container {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .star1 {
+    left: 380px;
+  }
+
+  .star2 {
+    left: 410px;
+  }
+
+  .polygon1 {
+    left: 650px;
+  }
+
+  .polygon2 {
+    left: 670px;
+  }
+
+  .line {
+    left: 230px;
+  }
+
 }

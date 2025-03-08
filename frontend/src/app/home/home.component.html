@@ -1,14 +1,52 @@
 <div class="body">
-    <h1>Hello</h1>
+  <div *ngIf="session; else elseBlock">
+    <span>UserId:</span>
+    <h3>{{ userId }}</h3>
 
-    <div *ngIf="session; else elseBlock">
-        <span>UserId:</span>
-        <h3>{{ userId }}</h3>
+    <button (click)="onLogout()">Sign Out</button>
+  </div>
 
-        <button (click)="onLogout()">Sign Out</button>
+  <ng-template #elseBlock>
+    <app-header/>
+    <div class="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
+      <div>
+        <img class="star1" ngSrc="/img/star.svg" alt="Start Icon" height="42" width="42">
+        <img class="star2" ngSrc="/img/star.svg" alt="Start Icon" height="20" width="20">
+        <img class="polygon1" ngSrc="/img/polygon.svg" alt="Start Icon" height="28" width="28">
+        <img class="polygon2" ngSrc="/img/polygon.svg" alt="Start Icon" height="20" width="20">
+
+        <h1 class="home-title">Let's shorten <br> your URL</h1>
+
+        <p class="home-p">Because it's much cooler to have a nice URL to share</p>
+
+        <div class="main-input-container nb-container">
+          <div style="height: 1.9rem; width: 100%; display: flex">
+            <input type="text" class="main-input-text nb-container-light" placeholder="http://superlongdomainname.com/a-path-so-long-that-you-might-want-to-take-a-coffee-break-before-reaching-the-end"/>
+            <button class="main-input-btn nb-container-light">Shorten!</button>
+          </div>
+          <img class="line" ngSrc="/img/line.svg" alt="Start Icon" height="80" width="90">
+        </div>
+
+      </div>
+      <section class="prod-desc">
+        <h3>Shorten, Track, Repeat!</h3>
+        <p>
+          Each credit gives you the power to shorten one URL and unlock its <b>analytics</b>!
+        </p>
+        <p>
+          Track clicks, see where your visitors come from, and make data-driven decisions—all in one place.
+          <b>No hidden fees</b>, no hassle, just simple and effective link management!
+        </p>
+      </section>
+      <section class="pricing-cards-section">
+
+        @for (product of productItems(); track product.id) {
+          <app-pricing-card
+            [product]="product"
+          ></app-pricing-card>
+        }
+
+      </section>
     </div>
-    <p>Visit the <a href="https://supertokens.com">SuperTokens tutorial</a> to learn how to build Auth under a day.</p>
-    <ng-template #elseBlock>
-        <button (click)="redirectToLogin()">Sign in</button>
-    </ng-template>
+  </ng-template>
 </div>

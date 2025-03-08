@@ -1,0 +1,12 @@
+<div class="pricing-card">
+  <img class="card-image" ngSrc="/img/hand-give.svg" alt="Hand give money image" height="95" width="105">
+  <h3 class="card-title">{{ product.title }}</h3>
+  <p class="card-price">$ {{ product.price }} - {{ product.valueInCredits }} credits</p>
+  <p class="card-subtitle">{{ product.subtitle }}</p>
+  <ul class="card-ul">
+    @for (item of product.description; track item) {
+      <li>{{ item }}</li>
+    }
+  </ul>
+  <button class="card-buy-btn nb-container">Buy</button>
+</div>

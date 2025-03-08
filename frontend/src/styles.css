@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Ubuntu, sans-serif;
+  background-color: #fffdf8;
+  padding: 12px;
+}
+
+.nb-container {
+  box-shadow: 2px 2px 0 0 #000;
+  border-radius: 0;
+  border: 2px solid #070707;
+}
+
+.nb-container-light {
+  box-shadow: 2px 2px 0 0 #000;
+  border-radius: 0;
+  border: 1px solid #070707;
+}
+
+

@@ -1,0 +1,12 @@
+<nav class="nav-header">
+  <h1 (click)="redirectToHome()" class="home-link">Df.ly</h1>
+  <div *ngIf="session; else elseBlock">
+    <!-- show other other info, like the amount of credits, etc. There is no design yet-->
+  </div>
+
+  <ng-template #elseBlock>
+    <button (click)="redirectToLogin()" class="nb-container user-session-link">Log In / Sign Up</button>
+  </ng-template>
+</nav>
+
+<div class="end-line"></div>

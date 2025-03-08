@@ -1,25 +1,23 @@
-import {AfterViewInit, Component, inject, signal} from "@angular/core";
-
+import {Component} from '@angular/core';
 import * as Session from "supertokens-web-js/recipe/session";
-import {ProductsService} from "../services/products.service";
-import {Product} from "../models/products.type";
+import {NgIf} from "@angular/common";
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"],
+  selector: 'app-header',
+  standalone: true,
+  imports: [
+    NgIf
+  ],
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.css'
 })
-export class HomeComponent implements AfterViewInit {
-  productService = inject(ProductsService);
-  productItems = signal<Array<Product>>([]);
-
+export class HeaderComponent {
   public rootId = "rootId";
   public userId = "";
   public session = false;
 
   ngAfterViewInit() {
     this.getUserInfo();
-    this.productItems.set(this.productService.productItems);
   }
 
   async getUserInfo() {
@@ -36,5 +34,9 @@ export class HomeComponent implements AfterViewInit {
 
   redirectToLogin() {
     window.location.href = "auth";
+  }
+
+  redirectToHome() {
+    window.location.href = "/";
   }
 }
